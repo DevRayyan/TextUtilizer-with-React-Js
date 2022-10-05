@@ -4,13 +4,7 @@ import Textform from "./Components/Textform";
 import Alert from "./Components/Alert";
 import About from "./Components/About";
 import "./Style.css";
-import { Route } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [mode, setmode] = useState("light");
   const [alert, setalert] = useState(null);
@@ -44,11 +38,42 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar title="TextUtilizer" mode={mode} togglemode={togglemode} />
         <Alert alert={alert} />
         <Routes>
-          <Route exact path="/" element={<Textform heading="Enter the text to analyze below" showalert={showalert} mode={mode}/>}/>
-          <Route exact path="/about" element={<About mode={mode} />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Navbar
+                  title="TextUtilizer"
+                  mode={mode}
+                  togglemode={togglemode}
+                  active={true}
+                />
+                <Textform
+                  heading="Enter the text to analyze below"
+                  showalert={showalert}
+                  mode={mode}
+                />
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/about"
+            element={
+              <>
+                <Navbar
+                  title="TextUtilizer"
+                  mode={mode}
+                  togglemode={togglemode}
+                  active={false}
+                />
+                <About mode={mode} />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </>
